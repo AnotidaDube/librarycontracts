@@ -33,6 +33,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['e-resources.library.msu.ac.zw', 'localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://e-resources.library.msu.ac.zw',
+    'https://e-resources.library.msu.ac.zw',
+]
+
 
 # Application definition
 
