@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-g9pp@kgx*h$=-c@-0ymu3v-me&3z3(sw9ndb3u^pq72$p#$h#&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['e-resources.library.msu.ac.zw', 'localhost', '127.0.0.1']
 
 
 # Application definition
