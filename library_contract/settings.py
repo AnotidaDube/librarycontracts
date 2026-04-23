@@ -172,3 +172,14 @@ LOGOUT_REDIRECT_URL = 'home'
 # Where to go if a user tries to access a restricted page without logging in
 LOGIN_URL = 'login'
 mimetypes.add_type("application/pdf", ".pdf", True)
+
+
+# Tell Django it's behind an HTTPS proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Force all connections to use HTTPS
+SECURE_SSL_REDIRECT = True
+
+# Security headers for production
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
