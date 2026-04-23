@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - MSU Library{% endblock %}
+
+{% block content %}
+<style>
+    /* * UPDATE THESE HEX CODES TO THE CORRECT MSU COLORS 
+     * I have set them up as variables so you only have to change them in one place.
+     */
+    :root {
+        --msu-primary-blue: #5998FF; /* Enter the correct MSU Blue hex code here */
+        --msu-gold: #F5C735;         /* Enter the correct MSU Gold hex code here */
+        --msu-text-dark: #333333;
+    }
+
+    .signup-card {
+        border: none;
+        border-top: 5px solid var(--msu-gold);
+        border-radius: 8px;
+    }
+    
+    .signup-header {
+        background-color: var(--msu-primary-blue);
+        border-bottom: none;
+        padding: 1.5rem 1rem;
+    }
+    
+    .btn-msu-blue {
+        background-color: var(--msu-primary-blue);
+        color: #FFFFFF;
+        border: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .btn-msu-blue:hover {
+        background-color: var(--msu-gold);
+        color: var(--msu-text-dark);
+    }
+</style>
+
+<div class="row justify-content-center" style="margin-top: 50px;">
+    <div class="col-md-5">
+        <div class="card shadow signup-card">
+            <div class="card-header signup-header">
+                <h4 class="mb-0 text-center" style="color: #FFFFFF; font-weight: bold;">
+                    Create <span style="color: var(--msu-gold);">Account</span>
+                </h4>
+            </div>
+            
+            <div class="card-body p-4">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" style="color: var(--msu-text-dark);">{{ field.label }}</label>
+                            {{ field }}
+                            
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                            
+                            {% if field.errors %}
+                                <div class="text-danger small mt-1 fw-bold">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-msu-blue btn-lg">Register</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="card-footer text-center" style="background-color: #f8f9fa; color: #6c757d; border-top: 1px solid #e9ecef;">
+                Already have an account? <a href="{% url 'login' %}" style="color: var(--msu-primary-blue); font-weight: bold;">Login here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

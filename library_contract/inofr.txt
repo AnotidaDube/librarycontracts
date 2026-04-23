@@ -1,0 +1,10 @@
+If your university uses Google (Gmail)
+SMTP Server Address: Use smtp.gmail.com
+
+SMTP Port: Use 587
+
+Encryption Requirement: Use TLS
+
+Account Username & Sender Address: Use the actual email address (e.g., erm-alerts@msu.ac.zw).
+
+app password:       ymul zthf sdqy itvb

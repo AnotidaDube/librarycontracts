@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Contract - MSU Library{% endblock %}
+
+{% block content %}
+<style>
+    /* ==========================================
+       ENTERPRISE FORM UI STYLES
+       ========================================== */
+    .form-card {
+        background: #ffffff;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        border-top: 6px solid var(--msu-gold);
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .form-header {
+        background-color: var(--msu-primary-blue);
+        padding: 2rem;
+        color: white;
+    }
+
+    .form-header h2 {
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: -0.5px;
+    }
+
+    .form-section-title {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        color: var(--msu-primary-blue);
+        border-bottom: 2px solid #f1f3f5;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    /* Input Styling */
+    .form-control, .form-select {
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--msu-primary-blue);
+        box-shadow: 0 0 0 4px rgba(0, 58, 106, 0.1);
+        outline: none;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Buttons */
+    .btn-save {
+        background-color: var(--msu-primary-blue);
+        color: white;
+        font-weight: 700;
+        padding: 0.8rem 2.5rem;
+        border-radius: 10px;
+        border: none;
+        transition: all 0.3s;
+    }
+
+    .btn-save:hover {
+        background-color: var(--msu-gold);
+        color: var(--msu-text-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 58, 106, 0.2);
+    }
+
+    .btn-cancel {
+        background-color: transparent;
+        color: #6c757d;
+        font-weight: 600;
+        border: 2px solid #dee2e6;
+        padding: 0.8rem 2rem;
+        border-radius: 10px;
+        transition: all 0.2s;
+    }
+
+    .btn-cancel:hover {
+        background-color: #f8f9fa;
+        color: #343a40;
+        border-color: #ced4da;
+    }
+
+    /* Error Handling */
+    .error-feedback {
+        background-color: #fff5f5;
+        color: #e03131;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        border-left: 4px solid #e03131;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+        <div class="form-card">
+            <div class="form-header text-center">
+                <h2>Add <span style="color: var(--msu-gold);">New Contract</span></h2>
+                <p class="mb-0 opacity-75">Initialize a new electronic resource subscription</p>
+            </div>
+
+            <div class="card-body p-4 p-md-5">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-section-title">1. Resource Identification</div>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-12">
+                            <label class="form-label">Category</label>
+                            {{ form.category }}
+                            {% if form.category.errors %}<div class="error-feedback">{{ form.category.errors }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Resource Name</label>
+                            {{ form.resource }}
+                            <small class="text-muted d-block mt-1">{{ form.resource.help_text }}</small>
+                            {% if form.resource.errors %}<div class="error-feedback">{{ form.resource.errors }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Vendor Name</label>
+                            {{ form.vendor }}
+                            <small class="text-muted d-block mt-1">{{ form.vendor.help_text }}</small>
+                            {% if form.vendor.errors %}<div class="error-feedback">{{ form.vendor.errors }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Vendor Alert Email</label>
+                            {{ form.vendor_email }}
+                            <small class="text-muted d-block mt-1">{{ form.vendor_email.help_text }}</small>
+                            {% if form.vendor_email.errors %}<div class="error-feedback">{{ form.vendor_email.errors }}</div>{% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">2. Subscription & Financials</div>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Start Date</label>
+                            {{ form.start_date }}
+                            {% if form.start_date.errors %}<div class="error-feedback">{{ form.start_date.errors }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">End Date (Expiry)</label>
+                            {{ form.end_date }}
+                            {% if form.end_date.errors %}<div class="error-feedback">{{ form.end_date.errors }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Total Cost</label>
+                            {{ form.cost }}
+                            {% if form.cost.errors %}<div class="error-feedback">{{ form.cost.errors }}</div>{% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Currency</label>
+                            {{ form.currency }}
+                            {% if form.currency.errors %}<div class="error-feedback">{{ form.currency.errors }}</div>{% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">3. Documentation</div>
+                    <div class="row g-4">
+                        <div class="col-md-12 mb-4">
+                            <label class="form-label">Signed Contract (PDF)</label>
+                            <div class="p-3 border-dashed rounded-3 bg-light">
+                                {{ form.pdf_contract }}
+                            </div>
+                            {% if form.pdf_contract.errors %}<div class="error-feedback">{{ form.pdf_contract.errors }}</div>{% endif %}
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column flex-md-row justify-content-end gap-3 mt-5 pt-4 border-top">
+                        <a href="{% url 'contract_list' %}" class="btn btn-cancel">Cancel & Discard</a>
+                        <button type="submit" class="btn btn-save">Register Subscription</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Just a touch of JS to apply Bootstrap classes to the dynamic Django inputs
+    document.querySelectorAll('input, select, textarea').forEach(element => {
+        if (element.type !== 'checkbox' && element.type !== 'file') {
+            element.classList.add('form-control');
+        } else if (element.tagName === 'SELECT') {
+            element.classList.add('form-select');
+        }
+    });
+</script>
+{% endblock %}

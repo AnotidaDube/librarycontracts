@@ -1,0 +1,46 @@
+/* 1. FORCE FULL HEIGHT */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+}
+
+/* 2. NAVBAR */
+.navbar {
+    background-color: #003366;
+    color: white;
+    padding: 1rem 2rem;
+    flex-shrink: 0; /* Important: Don't let navbar shrink */
+}
+.navbar a { color: white; text-decoration: none; }
+
+/* 3. CONTAINER (The Middle Part) */
+.container {
+    flex: 1 0 auto; /* Grows to fill empty space */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    background-color: white; /* Optional: Makes the content area white */
+}
+
+/* 4. FOOTER (The Bottom Part) */
+footer {
+    flex-shrink: 0; /* Important: Don't let footer shrink */
+    background-color: #333; /* Dark Grey */
+    color: white;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+}
+
+/* 5. STATUS BADGES */
+.status-critical { background-color: #ffebee; color: #c62828; padding: 5px; border-radius: 4px; font-weight: bold; }
+.status-healthy { background-color: #e8f5e9; color: #2e7d32; padding: 5px; border-radius: 4px; font-weight: bold; }

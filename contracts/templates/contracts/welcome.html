@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome - MSU Library Systems{% endblock %}
+
+{% block content %}
+<style>
+    /* ==========================================
+       ENTERPRISE UI STYLES
+       ========================================== */
+    .hero-section {
+        background-color: #FFFFFF;
+        border-radius: 16px;
+        border-top: 6px solid var(--msu-primary-blue);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-bg-pattern {
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, var(--msu-primary-blue) 0%, transparent 70%);
+        opacity: 0.05;
+        border-radius: 50%;
+        z-index: 0;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Modernized Buttons */
+    .btn-msu-primary {
+        background-color: var(--msu-primary-blue);
+        color: #FFFFFF;
+        border: none;
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-msu-primary:hover {
+        background-color: var(--msu-gold);
+        color: var(--msu-text-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-msu-secondary {
+        background-color: transparent;
+        color: var(--msu-primary-blue);
+        border: 2px solid var(--msu-primary-blue);
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-msu-secondary:hover {
+        background-color: var(--msu-primary-blue);
+        color: #FFFFFF;
+        transform: translateY(-2px);
+    }
+
+    /* Sleek Cards */
+    .info-card {
+        border-radius: 12px;
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .card-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+    }
+
+    /* Live Status Dot Animation */
+    .status-dot {
+        height: 12px;
+        width: 12px;
+        background-color: #198754;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+        box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7);
+        animation: pulse-green 2s infinite;
+    }
+
+    @keyframes pulse-green {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(25, 135, 84, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(25, 135, 84, 0); }
+    }
+</style>
+
+<div class="hero-section shadow-sm p-5 mb-5 mt-4">
+    <div class="hero-bg-pattern"></div>
+    <div class="container-fluid py-4 hero-content text-center">
+        
+        <h1 class="display-5 fw-bolder mb-3" style="color: var(--msu-primary-blue); letter-spacing: -1px;">
+            Midlands State University
+        </h1>
+        <h2 class="h3 fw-light text-muted mb-4">Electronic Resources Management</h2>
+        
+        <p class="col-md-8 fs-5 mx-auto mb-5" style="color: var(--msu-text-dark); line-height: 1.6;">
+            A centralized, intelligent platform for tracking E-Resource subscriptions, 
+            vendor agreements, and license lifecycles. Designed to ensure timely renewals 
+            and total financial transparency.
+        </p>
+        
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            {% if user.is_authenticated %}
+                <a href="{% url 'contract_list' %}" class="btn btn-msu-primary btn-lg px-5">
+                    Launch Dashboard
+                </a>
+                <a href="{% url 'add_contract' %}" class="btn btn-msu-secondary btn-lg px-5">
+                    + New Contract
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-msu-primary btn-lg px-5">
+                    Secure Login
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card info-card shadow-sm p-4 bg-white" style="border-left: 4px solid #198754;">
+            <div class="card-icon" style="background-color: rgba(25, 135, 84, 0.1);">
+                <svg width="24" height="24" fill="#198754" viewBox="0 0 16 16">
+                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                    <path d="M6 5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1H6V5zm0 3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1H6V8zm0 3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1H6v-1z"/>
+                </svg>
+            </div>
+            <h3 class="h5 fw-bold mb-3" style="color: var(--msu-text-dark);">
+                <span class="status-dot"></span>System Metrics
+            </h3>
+            <p class="text-muted mb-0">
+                Core services are operational. The automated expiry watchdog is currently active and monitoring the PostgreSQL database for upcoming renewals.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card info-card shadow-sm p-4 bg-white" style="border-left: 4px solid var(--msu-gold);">
+            <div class="card-icon" style="background-color: rgba(245, 199, 53, 0.1);">
+                <svg width="24" height="24" fill="var(--msu-gold)" viewBox="0 0 16 16">
+                    <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 13A6 6 0 1 1 8 2a6 6 0 0 1 0 12z"/>
+                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                </svg>
+            </div>
+            <h3 class="h5 fw-bold mb-3" style="color: var(--msu-text-dark);">Technical Support</h3>
+            <p class="text-muted mb-4">
+                Encountering issues with authentication or document uploads? Reach out to the IT Systems department for immediate assistance.
+            </p>
+            <div>
+                <a href="tel:+263783219519" class="text-decoration-none fw-bold" style="color: var(--msu-primary-blue);">
+                    Contact Helpdesk &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

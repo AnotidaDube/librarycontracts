@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - MSU Library{% endblock %}
+
+{% block content %}
+<style>
+    /* Custom MSU Branding using the variables defined in base.html */
+    .login-card {
+        border: none;
+        border-top: 5px solid var(--msu-gold);
+        border-radius: 8px;
+    }
+    .login-header {
+        background-color: var(--msu-primary-blue);
+        border-bottom: none;
+        padding: 1.5rem 1rem;
+    }
+    .btn-msu-blue {
+        background-color: var(--msu-primary-blue);
+        color: #FFFFFF;
+        border: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .btn-msu-blue:hover {
+        background-color: var(--msu-gold);
+        color: var(--msu-text-dark);
+    }
+</style>
+
+<div class="row justify-content-center" style="margin-top: 50px;">
+    <div class="col-md-5">
+        <div class="card shadow login-card">
+            <div class="card-header login-header">
+                <h4 class="mb-0 text-center" style="color: #FFFFFF; font-weight: bold;">
+                    Library System <span style="color: var(--msu-gold);">Login</span>
+                </h4>
+            </div>
+            
+            <div class="card-body p-4">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            Invalid username or password. Please try again.
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold" style="color: var(--msu-text-dark);">Username</label>
+                        <input type="text" name="username" class="form-control" autofocus required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold" style="color: var(--msu-text-dark);">Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-msu-blue btn-lg">Sign In</button>
+                    </div>
+                </form>
+            </div>
+            
+            
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
