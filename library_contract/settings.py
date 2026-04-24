@@ -31,7 +31,7 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = 'django-insecure-g9pp@kgx*h$=-c@-0ymu3v-me&3z3(sw9ndb3u^pq72$p#$h#&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['e-resources.library.msu.ac.zw', 'localhost', '127.0.0.1']
 
@@ -173,9 +173,10 @@ LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 mimetypes.add_type("application/pdf", ".pdf", True)
 
-
-# Tell Django it's behind an HTTPS proxy
+# 2. Tell Django it is sitting securely behind Nginx
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
 
 # Force all connections to use HTTPS
 SECURE_SSL_REDIRECT = True
