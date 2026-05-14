@@ -6,6 +6,7 @@ from .forms import ContractForm
 from .models import Contract, Category
 from django.utils import timezone
 from datetime import timedelta
+from django.contrib.auth.decorators import permission_required
 
 # ==========================================
 # AUTHENTICATION VIEWS
@@ -87,6 +88,7 @@ def contract_list(request):
     return render(request, 'contracts/contract_list.html', context)
 
 # ADD NEW CONTRACT
+@permission_required('contracts.add_contract', raise_exception=True)
 @login_required(login_url='login')
 def add_contract(request):
     if request.method == 'POST':
